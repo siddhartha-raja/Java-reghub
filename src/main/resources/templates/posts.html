@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Java Reghub Posts</title>
+    <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body>
+<main class="page">
+    <section class="toolbar">
+        <div>
+            <p class="eyebrow">Jenkins CI/CD demo app</p>
+            <h1>Posts</h1>
+        </div>
+        <form class="post-form" method="post" action="/posts" enctype="multipart/form-data">
+            <input type="text" name="title" placeholder="Post title" maxlength="160" required>
+            <input type="file" name="image" accept="image/*" required>
+            <button type="submit">Create Post</button>
+        </form>
+    </section>
+
+    <p class="message" th:if="${param.created}">Post created successfully</p>
+    <p class="message" th:if="${param.deleted}">Post deleted successfully</p>
+
+    <section class="grid" th:if="${!posts.isEmpty()}">
+        <article class="post-card" th:each="post : ${posts}">
+            <img th:src="@{/posts/{id}/image(id=${post.id})}" th:alt="${post.title}">
+            <div class="post-body">
+                <h2 th:text="${post.title}">Example title</h2>
+                <div class="post-meta">
+                    <time th:text="${#temporals.format(post.createdAt, 'dd MMM yyyy HH:mm')}">01 Jan 2026</time>
+                    <form method="post" th:action="@{/posts/{id}/delete(id=${post.id})}">
+                        <button class="delete-button" type="submit">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section class="empty" th:if="${posts.isEmpty()}">
+        <h2>No posts yet</h2>
+        <p>Create the first post with a title and image upload.</p>
+    </section>
+</main>
+</body>
+</html>
