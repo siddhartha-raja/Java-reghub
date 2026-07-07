@@ -1,0 +1,35 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: java-reghub-dev
+  region: us-east-1
+
+iam:
+  withOIDC: true
+
+addons:
+  - name: aws-ebs-csi-driver
+    wellKnownPolicies:
+      ebsCSIController: true
+
+vpc:
+  nat:
+    gateway: Disable
+
+managedNodeGroups:
+  - name: spot-workers
+    instanceTypes:
+      - t3.medium
+      - t3a.medium
+    spot: true
+    minSize: 1
+    desiredCapacity: 2
+    maxSize: 3
+    volumeSize: 30
+    privateNetworking: false
+    labels:
+      workload: general
+    tags:
+      app: java-reghub
+      environment: dev

@@ -1,0 +1,10 @@
+resources:
+  - namespace.yaml
+  - mysql-secret.yaml
+  - mysql.yaml
+  - app-configmap.yaml
+  - app-deployment.yaml
+  - app-ingress.yaml
+  - app-service.yaml
+  - notification-configmap.yaml
+  - notification-deployment.yaml

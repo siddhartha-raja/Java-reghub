@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: reghub-config
+  namespace: reghub
+data:
+  AWS_REGION: us-east-1
+  AWS_S3_BUCKET: design-genesis-dev
+  SPRING_KAFKA_BOOTSTRAP_SERVERS: reghub-kafka-kafka-bootstrap.kafka.svc.cluster.local:9092
+  SPRING_DATASOURCE_URL: jdbc:mysql://mysql.reghub.svc.cluster.local:3306/reghub
+  SPRING_DATASOURCE_USERNAME: reghub
+  APP_KAFKA_TOPIC_POST_CREATED: post.created
+  APP_KAFKA_TOPIC_POST_DELETED: post.deleted

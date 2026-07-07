@@ -1,5 +1,6 @@
 package com.reghub.service;
 
+import com.reghub.event.PostEventPublisher;
 import com.reghub.model.Post;
 import com.reghub.repository.PostRepository;
 import java.util.List;
@@ -17,10 +18,12 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final StorageService storageService;
+    private final PostEventPublisher postEventPublisher;
 
-    public PostService(PostRepository postRepository, StorageService storageService) {
+    public PostService(PostRepository postRepository, StorageService storageService, PostEventPublisher postEventPublisher) {
         this.postRepository = postRepository;
         this.storageService = storageService;
+        this.postEventPublisher = postEventPublisher;
     }
 
     @Transactional(readOnly = true)
@@ -39,7 +42,9 @@ public class PostService {
 
         StoredFile storedFile = storageService.store(image);
         Post post = new Post(title.trim(), storedFile.url(), storedFile.key());
-        return postRepository.save(post);
+        Post savedPost = postRepository.save(post);
+        postEventPublisher.publishPostCreated(savedPost);
+        return savedPost;
     }
 
     @Transactional(readOnly = true)
@@ -54,6 +59,7 @@ public class PostService {
         Post post = postRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Post not found"));
         postRepository.delete(post);
+        postEventPublisher.publishPostDeleted(post);
 
         try {
             storageService.delete(post.getImageKey());

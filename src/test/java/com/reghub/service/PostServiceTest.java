@@ -7,6 +7,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.reghub.event.PostEventPublisher;
 import com.reghub.model.Post;
 import com.reghub.repository.PostRepository;
 import java.util.Optional;
@@ -27,6 +28,9 @@ class PostServiceTest {
     @Mock
     private StorageService storageService;
 
+    @Mock
+    private PostEventPublisher postEventPublisher;
+
     @InjectMocks
     private PostService postService;
 
@@ -42,6 +46,7 @@ class PostServiceTest {
         verify(postRepository).save(postCaptor.capture());
         assertThat(postCaptor.getValue().getTitle()).isEqualTo("Demo title");
         assertThat(saved.getImageUrl()).isEqualTo("https://example.com/demo.png");
+        verify(postEventPublisher).publishPostCreated(saved);
     }
 
     @Test
@@ -73,6 +78,7 @@ class PostServiceTest {
         postService.deletePost(10L);
 
         verify(postRepository).delete(post);
+        verify(postEventPublisher).publishPostDeleted(post);
         verify(storageService).delete("posts/demo.png");
     }
 

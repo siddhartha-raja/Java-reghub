@@ -13,3 +13,5 @@ target/
 Thumbs.db
 
 docker-data/
+
+infra/api-gateway/outputs.env

@@ -11,6 +11,32 @@ A small Spring Boot tutorial app for Jenkins CI/CD practice. It lets a user crea
 - Unit tests and a Testcontainers-based MySQL integration test
 - `Dockerfile`, `docker-compose.yml`, and `Jenkinsfile`
 
+## EKS Deployment Design
+
+The first-pass EKS, API Gateway, ingress, Kafka, and GitHub Actions deployment
+plan is documented in [docs/eks-microservices-design.md](docs/eks-microservices-design.md).
+
+For the first low-cost development cluster, use
+[docs/create-low-cost-eks.md](docs/create-low-cost-eks.md).
+
+After the cluster is created, deploy the current app with
+[docs/deploy-current-app-to-eks.md](docs/deploy-current-app-to-eks.md).
+
+Then expose the service inside the VPC with an internal ALB using
+[docs/deploy-ingress-alb.md](docs/deploy-ingress-alb.md).
+
+Put API Gateway in front of the internal ALB with
+[docs/deploy-api-gateway.md](docs/deploy-api-gateway.md).
+
+Deploy Kafka with Strimzi using
+[docs/deploy-kafka-eks.md](docs/deploy-kafka-eks.md).
+
+The first async consumer lives under `services/notification-service`; see
+[docs/notification-service.md](docs/notification-service.md).
+
+For a continuation summary and remaining roadmap, see
+[docs/next-steps-handoff.md](docs/next-steps-handoff.md).
+
 ## Local Setup
 
 Start MySQL:
@@ -79,6 +105,9 @@ AWS_REGION=us-east-1
 AWS_S3_BUCKET=design-genesis-dev
 AWS_ACCESS_KEY_ID=...
 AWS_SECRET_ACCESS_KEY=...
+SPRING_KAFKA_BOOTSTRAP_SERVERS=localhost:9092
+APP_KAFKA_TOPIC_POST_CREATED=post.created
+APP_KAFKA_TOPIC_POST_DELETED=post.deleted
 ```
 
 Do not commit `.env`; it is ignored by Git.

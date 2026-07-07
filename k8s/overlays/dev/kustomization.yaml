@@ -1,0 +1,7 @@
+resources:
+  - ../../base
+
+images:
+  - name: 818916267011.dkr.ecr.us-east-1.amazonaws.com/redis-db-demo
+    newTag: dev
+

@@ -1,0 +1,474 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R 19 0 R 21 0 R 23 0 R 25 0 R] /Count 10 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+6 0 obj
+<< /Length 2424 >>
+stream
+BT /F2 22 Tf 54 742 Td (Java Reghub Student Guide) Tj ET
+BT /F2 15 Tf 54 705 Td (1. What This App Does) Tj ET
+BT /F1 11 Tf 54 675 Td (Java Reghub is a small Spring Boot web app.) Tj ET
+BT /F1 11 Tf 54 653 Td (It lets a user:) Tj ET
+BT /F1 11 Tf 64 631 Td (- open a web page) Tj ET
+BT /F1 11 Tf 64 616 Td (- create a post with a title and an image) Tj ET
+BT /F1 11 Tf 64 601 Td (- see all posts on the page) Tj ET
+BT /F1 11 Tf 64 586 Td (- view each post image) Tj ET
+BT /F1 11 Tf 64 571 Td (- delete a post) Tj ET
+BT /F1 11 Tf 54 549 Td (The app is useful for learning:) Tj ET
+BT /F1 11 Tf 64 527 Td (- Spring Boot) Tj ET
+BT /F1 11 Tf 64 512 Td (- MVC layers) Tj ET
+BT /F1 11 Tf 64 497 Td (- database access with JPA) Tj ET
+BT /F1 11 Tf 64 482 Td (- file upload) Tj ET
+BT /F1 11 Tf 64 467 Td (- AWS S3 storage) Tj ET
+BT /F1 11 Tf 64 452 Td (- Jenkins CI/CD basics) Tj ET
+BT /F2 15 Tf 54 430 Td (2. Simple User Flow) Tj ET
+BT /F1 11 Tf 54 400 Td (This is what happens when a user creates a post:) Tj ET
+BT /F1 11 Tf 54 378 Td (1. The user opens `http://localhost:8080`.) Tj ET
+BT /F1 11 Tf 54 363 Td (2. The browser shows the `posts.html` page.) Tj ET
+BT /F1 11 Tf 54 348 Td (3. The user enters a title and chooses an image.) Tj ET
+BT /F1 11 Tf 54 333 Td (4. The browser sends the form to `POST /posts`.) Tj ET
+BT /F1 11 Tf 54 318 Td (5. The controller receives the request.) Tj ET
+BT /F1 11 Tf 54 303 Td (6. The controller calls the service.) Tj ET
+BT /F1 11 Tf 54 288 Td (7. The service checks the title and image.) Tj ET
+BT /F1 11 Tf 54 273 Td (8. The service uploads the image to S3.) Tj ET
+BT /F1 11 Tf 54 258 Td (9. The service saves the post details in MySQL.) Tj ET
+BT /F1 11 Tf 54 243 Td (10. The app redirects back to the home page.) Tj ET
+BT /F1 11 Tf 54 228 Td (11. The new post is shown on the page.) Tj ET
+BT /F2 15 Tf 54 206 Td (3. Main Layers) Tj ET
+BT /F1 11 Tf 54 176 Td (The app has these main layers:) Tj ET
+BT /F1 11 Tf 64 154 Td (- View layer: shows HTML pages to the user) Tj ET
+BT /F1 11 Tf 64 139 Td (- Controller layer: receives browser requests) Tj ET
+BT /F1 11 Tf 64 124 Td (- Service layer: contains business logic) Tj ET
+BT /F1 11 Tf 64 109 Td (- Repository layer: talks to the database) Tj ET
+BT /F1 11 Tf 64 94 Td (- Model layer: describes database data) Tj ET
+BT /F1 11 Tf 64 79 Td (- Storage layer: talks to AWS S3) Tj ET
+BT /F1 9 Tf 54 30 Td (Java Reghub Student Guide - Page 1 of 10) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 6 0 R >>
+endobj
+8 0 obj
+<< /Length 2145 >>
+stream
+BT /F1 11 Tf 64 742 Td (- Configuration layer: creates setup objects used by Spring) Tj ET
+BT /F1 11 Tf 54 720 Td (Each layer has a clear job. This makes the app easier to understand, test, and change.) Tj ET
+BT /F2 15 Tf 54 698 Td (4. View Layer) Tj ET
+BT /F1 11 Tf 54 668 Td (Main file:) Tj ET
+BT /F1 11 Tf 64 646 Td (- `src/main/resources/templates/posts.html`) Tj ET
+BT /F1 11 Tf 54 624 Td (The view is the web page seen by the user.) Tj ET
+BT /F1 11 Tf 54 602 Td (It does three main things:) Tj ET
+BT /F1 11 Tf 64 580 Td (- shows a form to create a post) Tj ET
+BT /F1 11 Tf 64 565 Td (- shows success messages after create or delete) Tj ET
+BT /F1 11 Tf 64 550 Td (- shows all posts in a grid) Tj ET
+BT /F1 11 Tf 54 528 Td (The form sends data to:) Tj ET
+BT /F1 11 Tf 64 506 Td (- `POST /posts`) Tj ET
+BT /F1 11 Tf 54 484 Td (Each image is loaded from:) Tj ET
+BT /F1 11 Tf 64 462 Td (- `GET /posts/{id}/image`) Tj ET
+BT /F1 11 Tf 54 440 Td (Each delete button sends data to:) Tj ET
+BT /F1 11 Tf 64 418 Td (- `POST /posts/{id}/delete`) Tj ET
+BT /F1 11 Tf 54 396 Td (The view uses Thymeleaf. Thymeleaf lets Java data appear inside HTML.) Tj ET
+BT /F1 11 Tf 54 374 Td (Example:) Tj ET
+BT /F1 11 Tf 64 352 Td (- the controller gives the page a list called `posts`) Tj ET
+BT /F1 11 Tf 64 337 Td (- Thymeleaf loops through `posts`) Tj ET
+BT /F1 11 Tf 64 322 Td (- each post becomes one card on the page) Tj ET
+BT /F2 15 Tf 54 300 Td (5. Controller Layer) Tj ET
+BT /F1 11 Tf 54 270 Td (Main file:) Tj ET
+BT /F1 11 Tf 64 248 Td (- `src/main/java/com/reghub/controller/PostController.java`) Tj ET
+BT /F1 11 Tf 54 226 Td (The controller is like the front desk of the app.) Tj ET
+BT /F1 11 Tf 54 204 Td (It receives requests from the browser and decides what should happen next.) Tj ET
+BT /F1 11 Tf 54 182 Td (It does not do heavy work itself. It calls the service layer.) Tj ET
+BT /F2 12 Tf 54 160 Td (Home Page Request) Tj ET
+BT /F1 11 Tf 54 135 Td (Method:) Tj ET
+BT /F1 11 Tf 64 113 Td (- `index`) Tj ET
+BT /F1 11 Tf 54 91 Td (URL:) Tj ET
+BT /F1 11 Tf 64 69 Td (- `GET /`) Tj ET
+BT /F1 9 Tf 54 30 Td (Java Reghub Student Guide - Page 2 of 10) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 8 0 R >>
+endobj
+10 0 obj
+<< /Length 1869 >>
+stream
+BT /F1 11 Tf 54 735 Td (What it does:) Tj ET
+BT /F1 11 Tf 64 713 Td (- asks the service for all posts) Tj ET
+BT /F1 11 Tf 64 698 Td (- puts the posts into the page model) Tj ET
+BT /F1 11 Tf 64 683 Td (- returns the `posts` view) Tj ET
+BT /F1 11 Tf 54 661 Td (Simple meaning:) Tj ET
+BT /F1 11 Tf 54 639 Td (The browser asks for the home page. The controller gets the posts and shows the page.) Tj ET
+BT /F2 12 Tf 54 617 Td (Create Post Request) Tj ET
+BT /F1 11 Tf 54 592 Td (Method:) Tj ET
+BT /F1 11 Tf 64 570 Td (- `createPost`) Tj ET
+BT /F1 11 Tf 54 548 Td (URL:) Tj ET
+BT /F1 11 Tf 64 526 Td (- `POST /posts`) Tj ET
+BT /F1 11 Tf 54 504 Td (What it receives:) Tj ET
+BT /F1 11 Tf 64 482 Td (- `title`) Tj ET
+BT /F1 11 Tf 64 467 Td (- `image`) Tj ET
+BT /F1 11 Tf 54 445 Td (What it does:) Tj ET
+BT /F1 11 Tf 64 423 Td (- sends the title and image to `PostService`) Tj ET
+BT /F1 11 Tf 64 408 Td (- redirects back to the home page) Tj ET
+BT /F1 11 Tf 54 386 Td (Simple meaning:) Tj ET
+BT /F1 11 Tf 54 364 Td (The browser sends a new post. The controller passes it to the service.) Tj ET
+BT /F2 12 Tf 54 342 Td (Image Request) Tj ET
+BT /F1 11 Tf 54 317 Td (Method:) Tj ET
+BT /F1 11 Tf 64 295 Td (- `image`) Tj ET
+BT /F1 11 Tf 54 273 Td (URL:) Tj ET
+BT /F1 11 Tf 64 251 Td (- `GET /posts/{id}/image`) Tj ET
+BT /F1 11 Tf 54 229 Td (What it does:) Tj ET
+BT /F1 11 Tf 64 207 Td (- asks the service to load the image for the post id) Tj ET
+BT /F1 11 Tf 64 192 Td (- sends image bytes back to the browser) Tj ET
+BT /F1 11 Tf 64 177 Td (- sets the image content type) Tj ET
+BT /F1 11 Tf 54 155 Td (Simple meaning:) Tj ET
+BT /F1 11 Tf 54 133 Td (The browser asks for an image. The controller returns the image data.) Tj ET
+BT /F2 12 Tf 54 111 Td (Delete Post Request) Tj ET
+BT /F1 11 Tf 54 86 Td (Method:) Tj ET
+BT /F1 9 Tf 54 30 Td (Java Reghub Student Guide - Page 3 of 10) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 10 0 R >>
+endobj
+12 0 obj
+<< /Length 1942 >>
+stream
+BT /F1 11 Tf 64 742 Td (- `deletePost`) Tj ET
+BT /F1 11 Tf 54 720 Td (URL:) Tj ET
+BT /F1 11 Tf 64 698 Td (- `POST /posts/{id}/delete`) Tj ET
+BT /F1 11 Tf 54 676 Td (What it does:) Tj ET
+BT /F1 11 Tf 64 654 Td (- asks the service to delete the post) Tj ET
+BT /F1 11 Tf 64 639 Td (- redirects back to the home page) Tj ET
+BT /F1 11 Tf 54 617 Td (Simple meaning:) Tj ET
+BT /F1 11 Tf 54 595 Td (The browser asks to delete a post. The controller tells the service to delete it.) Tj ET
+BT /F2 15 Tf 54 573 Td (6. Service Layer) Tj ET
+BT /F1 11 Tf 54 543 Td (Main file:) Tj ET
+BT /F1 11 Tf 64 521 Td (- `src/main/java/com/reghub/service/PostService.java`) Tj ET
+BT /F1 11 Tf 54 499 Td (The service layer contains the main app logic.) Tj ET
+BT /F1 11 Tf 54 477 Td (It is the brain of the app.) Tj ET
+BT /F1 11 Tf 54 455 Td (It decides the steps needed to complete each action.) Tj ET
+BT /F1 11 Tf 54 433 Td (The service uses:) Tj ET
+BT /F1 11 Tf 64 411 Td (- `PostRepository` for database work) Tj ET
+BT /F1 11 Tf 64 396 Td (- `StorageService` for image storage work) Tj ET
+BT /F2 12 Tf 54 374 Td (Find All Posts) Tj ET
+BT /F1 11 Tf 54 349 Td (Method:) Tj ET
+BT /F1 11 Tf 64 327 Td (- `findAll`) Tj ET
+BT /F1 11 Tf 54 305 Td (What it does:) Tj ET
+BT /F1 11 Tf 64 283 Td (- asks the repository for all posts) Tj ET
+BT /F1 11 Tf 64 268 Td (- sorts newest posts first) Tj ET
+BT /F1 11 Tf 54 246 Td (Simple meaning:) Tj ET
+BT /F1 11 Tf 54 224 Td (Get the posts that should appear on the page.) Tj ET
+BT /F2 12 Tf 54 202 Td (Create a Post) Tj ET
+BT /F1 11 Tf 54 177 Td (Method:) Tj ET
+BT /F1 11 Tf 64 155 Td (- `createPost`) Tj ET
+BT /F1 11 Tf 54 133 Td (What it does:) Tj ET
+BT /F1 11 Tf 64 111 Td (- checks that the title is not empty) Tj ET
+BT /F1 11 Tf 64 96 Td (- checks that an image was uploaded) Tj ET
+BT /F1 11 Tf 64 81 Td (- uploads the image using the storage service) Tj ET
+BT /F1 9 Tf 54 30 Td (Java Reghub Student Guide - Page 4 of 10) Tj ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 12 0 R >>
+endobj
+14 0 obj
+<< /Length 2059 >>
+stream
+BT /F1 11 Tf 64 742 Td (- creates a `Post` object) Tj ET
+BT /F1 11 Tf 64 727 Td (- saves the post using the repository) Tj ET
+BT /F1 11 Tf 54 705 Td (Simple meaning:) Tj ET
+BT /F1 11 Tf 54 683 Td (Save the image first, then save the post record in the database.) Tj ET
+BT /F2 12 Tf 54 661 Td (Load an Image) Tj ET
+BT /F1 11 Tf 54 636 Td (Method:) Tj ET
+BT /F1 11 Tf 64 614 Td (- `loadImage`) Tj ET
+BT /F1 11 Tf 54 592 Td (What it does:) Tj ET
+BT /F1 11 Tf 64 570 Td (- finds the post by id) Tj ET
+BT /F1 11 Tf 64 555 Td (- gets the image key from the post) Tj ET
+BT /F1 11 Tf 64 540 Td (- loads the real image from S3) Tj ET
+BT /F1 11 Tf 54 518 Td (Simple meaning:) Tj ET
+BT /F1 11 Tf 54 496 Td (Use the database to find which image belongs to a post, then get that image from S3.) Tj ET
+BT /F2 12 Tf 54 474 Td (Delete a Post) Tj ET
+BT /F1 11 Tf 54 449 Td (Method:) Tj ET
+BT /F1 11 Tf 64 427 Td (- `deletePost`) Tj ET
+BT /F1 11 Tf 54 405 Td (What it does:) Tj ET
+BT /F1 11 Tf 64 383 Td (- finds the post by id) Tj ET
+BT /F1 11 Tf 64 368 Td (- deletes the post from the database) Tj ET
+BT /F1 11 Tf 64 353 Td (- tries to delete the image from S3) Tj ET
+BT /F1 11 Tf 64 338 Td (- writes a warning log if the S3 delete fails) Tj ET
+BT /F1 11 Tf 54 316 Td (Simple meaning:) Tj ET
+BT /F1 11 Tf 54 294 Td (Remove the database record and also try to remove the uploaded image.) Tj ET
+BT /F2 15 Tf 54 272 Td (7. Repository Layer) Tj ET
+BT /F1 11 Tf 54 242 Td (Main file:) Tj ET
+BT /F1 11 Tf 64 220 Td (- `src/main/java/com/reghub/repository/PostRepository.java`) Tj ET
+BT /F1 11 Tf 54 198 Td (The repository layer talks to the database.) Tj ET
+BT /F1 11 Tf 54 176 Td (This app uses Spring Data JPA.) Tj ET
+BT /F1 11 Tf 54 154 Td (The repository extends:) Tj ET
+BT /F1 11 Tf 64 132 Td (- `JpaRepository<Post, Long>`) Tj ET
+BT /F1 11 Tf 54 110 Td (This gives the app many database methods automatically, such as:) Tj ET
+BT /F1 11 Tf 64 88 Td (- save) Tj ET
+BT /F1 11 Tf 64 73 Td (- find by id) Tj ET
+BT /F1 9 Tf 54 30 Td (Java Reghub Student Guide - Page 5 of 10) Tj ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 14 0 R >>
+endobj
+16 0 obj
+<< /Length 2134 >>
+stream
+BT /F1 11 Tf 64 742 Td (- delete) Tj ET
+BT /F1 11 Tf 64 727 Td (- find all) Tj ET
+BT /F1 11 Tf 54 705 Td (The app also defines one custom method:) Tj ET
+BT /F1 11 Tf 64 683 Td (- `findAllByOrderByCreatedAtDesc`) Tj ET
+BT /F1 11 Tf 54 661 Td (Simple meaning:) Tj ET
+BT /F1 11 Tf 54 639 Td (Get all posts from the database, newest first.) Tj ET
+BT /F2 15 Tf 54 617 Td (8. Model Layer) Tj ET
+BT /F1 11 Tf 54 587 Td (Main file:) Tj ET
+BT /F1 11 Tf 64 565 Td (- `src/main/java/com/reghub/model/Post.java`) Tj ET
+BT /F1 11 Tf 54 543 Td (The model describes the data saved in the database.) Tj ET
+BT /F1 11 Tf 54 521 Td (The `Post` class maps to the `posts` table.) Tj ET
+BT /F1 11 Tf 54 499 Td (Each post has:) Tj ET
+BT /F1 11 Tf 64 477 Td (- `id`: unique database id) Tj ET
+BT /F1 11 Tf 64 462 Td (- `title`: post title) Tj ET
+BT /F1 11 Tf 64 447 Td (- `imageUrl`: public URL for the uploaded image) Tj ET
+BT /F1 11 Tf 64 432 Td (- `imageKey`: S3 key used to find the image) Tj ET
+BT /F1 11 Tf 64 417 Td (- `createdAt`: time when the post was created) Tj ET
+BT /F1 11 Tf 54 395 Td (The `@Entity` annotation tells JPA:) Tj ET
+BT /F1 11 Tf 64 373 Td (- this class should be stored in the database) Tj ET
+BT /F1 11 Tf 54 351 Td (The `@Table\(name = "posts"\)` annotation tells JPA:) Tj ET
+BT /F1 11 Tf 64 329 Td (- use the `posts` table) Tj ET
+BT /F1 11 Tf 54 307 Td (The `@PrePersist` method sets `createdAt` before the post is first saved.) Tj ET
+BT /F1 11 Tf 54 285 Td (Simple meaning:) Tj ET
+BT /F1 11 Tf 54 263 Td (The model is the Java version of a database row.) Tj ET
+BT /F2 15 Tf 54 241 Td (9. Storage Layer) Tj ET
+BT /F1 11 Tf 54 211 Td (Main files:) Tj ET
+BT /F1 11 Tf 64 189 Td (- `StorageService.java`) Tj ET
+BT /F1 11 Tf 64 174 Td (- `S3StorageService.java`) Tj ET
+BT /F1 11 Tf 64 159 Td (- `StoredFile.java`) Tj ET
+BT /F1 11 Tf 64 144 Td (- `StoredObject.java`) Tj ET
+BT /F1 11 Tf 64 129 Td (- `StorageException.java`) Tj ET
+BT /F1 11 Tf 54 107 Td (The storage layer handles image files.) Tj ET
+BT /F1 11 Tf 54 85 Td (The app stores images in AWS S3.) Tj ET
+BT /F1 9 Tf 54 30 Td (Java Reghub Student Guide - Page 6 of 10) Tj ET
+endstream
+endobj
+17 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 16 0 R >>
+endobj
+18 0 obj
+<< /Length 1954 >>
+stream
+BT /F2 12 Tf 54 742 Td (StorageService) Tj ET
+BT /F1 11 Tf 54 717 Td (This is an interface.) Tj ET
+BT /F1 11 Tf 54 695 Td (It says what storage must be able to do:) Tj ET
+BT /F1 11 Tf 64 673 Td (- store a file) Tj ET
+BT /F1 11 Tf 64 658 Td (- load a file) Tj ET
+BT /F1 11 Tf 64 643 Td (- delete a file) Tj ET
+BT /F1 11 Tf 54 621 Td (Simple meaning:) Tj ET
+BT /F1 11 Tf 54 599 Td (It is a contract for file storage.) Tj ET
+BT /F2 12 Tf 54 577 Td (S3StorageService) Tj ET
+BT /F1 11 Tf 54 552 Td (This is the real storage class.) Tj ET
+BT /F1 11 Tf 54 530 Td (It uses AWS S3.) Tj ET
+BT /F1 11 Tf 54 508 Td (When storing an image, it:) Tj ET
+BT /F1 11 Tf 64 486 Td (- reads the uploaded file) Tj ET
+BT /F1 11 Tf 64 471 Td (- creates a unique file key) Tj ET
+BT /F1 11 Tf 64 456 Td (- uploads the file to S3) Tj ET
+BT /F1 11 Tf 64 441 Td (- returns the S3 key and public URL) Tj ET
+BT /F1 11 Tf 54 419 Td (When loading an image, it:) Tj ET
+BT /F1 11 Tf 64 397 Td (- gets the image bytes from S3) Tj ET
+BT /F1 11 Tf 64 382 Td (- returns the image content and content type) Tj ET
+BT /F1 11 Tf 54 360 Td (When deleting an image, it:) Tj ET
+BT /F1 11 Tf 64 338 Td (- deletes the object from S3) Tj ET
+BT /F1 11 Tf 54 316 Td (Simple meaning:) Tj ET
+BT /F1 11 Tf 54 294 Td (This class is responsible for talking to AWS S3.) Tj ET
+BT /F2 15 Tf 54 272 Td (10. Configuration Layer) Tj ET
+BT /F1 11 Tf 54 242 Td (Main file:) Tj ET
+BT /F1 11 Tf 64 220 Td (- `src/main/java/com/reghub/config/S3Config.java`) Tj ET
+BT /F1 11 Tf 54 198 Td (This class creates the AWS S3 client.) Tj ET
+BT /F1 11 Tf 54 176 Td (Spring uses the `@Bean` method to create an `S3Client`.) Tj ET
+BT /F1 11 Tf 54 154 Td (The region comes from:) Tj ET
+BT /F1 11 Tf 64 132 Td (- `app.aws.region`) Tj ET
+BT /F1 11 Tf 54 110 Td (Simple meaning:) Tj ET
+BT /F1 11 Tf 54 88 Td (This layer prepares tools that other classes need.) Tj ET
+BT /F1 9 Tf 54 30 Td (Java Reghub Student Guide - Page 7 of 10) Tj ET
+endstream
+endobj
+19 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 18 0 R >>
+endobj
+20 0 obj
+<< /Length 2057 >>
+stream
+BT /F2 15 Tf 54 742 Td (11. Application Start) Tj ET
+BT /F1 11 Tf 54 712 Td (Main file:) Tj ET
+BT /F1 11 Tf 64 690 Td (- `src/main/java/com/reghub/ReghubApplication.java`) Tj ET
+BT /F1 11 Tf 54 668 Td (This is the start of the Spring Boot app.) Tj ET
+BT /F1 11 Tf 54 646 Td (The `main` method runs:) Tj ET
+BT /F1 11 Tf 64 624 Td (- `SpringApplication.run\(...\)`) Tj ET
+BT /F1 11 Tf 54 602 Td (Simple meaning:) Tj ET
+BT /F1 11 Tf 54 580 Td (This starts the web server and loads all Spring components.) Tj ET
+BT /F2 15 Tf 54 558 Td (12. Database) Tj ET
+BT /F1 11 Tf 54 528 Td (The app uses MySQL.) Tj ET
+BT /F1 11 Tf 54 506 Td (The connection settings are in:) Tj ET
+BT /F1 11 Tf 64 484 Td (- `src/main/resources/application.properties`) Tj ET
+BT /F1 11 Tf 54 462 Td (Important settings:) Tj ET
+BT /F1 11 Tf 64 440 Td (- database URL) Tj ET
+BT /F1 11 Tf 64 425 Td (- database username) Tj ET
+BT /F1 11 Tf 64 410 Td (- database password) Tj ET
+BT /F1 11 Tf 64 395 Td (- JPA table update setting) Tj ET
+BT /F1 11 Tf 54 373 Td (The app uses:) Tj ET
+BT /F1 11 Tf 64 351 Td (- `spring.jpa.hibernate.ddl-auto=update`) Tj ET
+BT /F1 11 Tf 54 329 Td (Simple meaning:) Tj ET
+BT /F1 11 Tf 54 307 Td (Hibernate can update the database table structure when the app starts.) Tj ET
+BT /F2 15 Tf 54 285 Td (13. Environment Variables) Tj ET
+BT /F1 11 Tf 54 255 Td (The app can read values from environment variables.) Tj ET
+BT /F1 11 Tf 54 233 Td (Examples:) Tj ET
+BT /F1 11 Tf 64 211 Td (- `SPRING_DATASOURCE_URL`) Tj ET
+BT /F1 11 Tf 64 196 Td (- `SPRING_DATASOURCE_USERNAME`) Tj ET
+BT /F1 11 Tf 64 181 Td (- `SPRING_DATASOURCE_PASSWORD`) Tj ET
+BT /F1 11 Tf 64 166 Td (- `AWS_REGION`) Tj ET
+BT /F1 11 Tf 64 151 Td (- `AWS_S3_BUCKET`) Tj ET
+BT /F1 11 Tf 64 136 Td (- `AWS_ACCESS_KEY_ID`) Tj ET
+BT /F1 11 Tf 64 121 Td (- `AWS_SECRET_ACCESS_KEY`) Tj ET
+BT /F1 11 Tf 54 99 Td (Simple meaning:) Tj ET
+BT /F1 11 Tf 54 77 Td (Secrets and environment-specific values should not be hard-coded in Java code.) Tj ET
+BT /F1 9 Tf 54 30 Td (Java Reghub Student Guide - Page 8 of 10) Tj ET
+endstream
+endobj
+21 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 20 0 R >>
+endobj
+22 0 obj
+<< /Length 2027 >>
+stream
+BT /F2 15 Tf 54 742 Td (14. Logs) Tj ET
+BT /F1 11 Tf 54 712 Td (The app uses normal Spring Boot logging.) Tj ET
+BT /F1 11 Tf 54 690 Td (Right now, logs go to the console by default.) Tj ET
+BT /F1 11 Tf 54 668 Td (That means:) Tj ET
+BT /F1 11 Tf 64 646 Td (- if you run the app in a terminal, logs appear in the terminal) Tj ET
+BT /F1 11 Tf 64 631 Td (- if you run the app in Docker, logs appear in container logs) Tj ET
+BT /F1 11 Tf 64 616 Td (- no special log file is configured in the code) Tj ET
+BT /F1 11 Tf 54 594 Td (To save logs to a local file, run:) Tj ET
+BT /F3 10 Tf 66 568 Td (java -jar target/java-reghub-0.0.1-SNAPSHOT.jar > app.log 2>&1) Tj ET
+BT /F2 15 Tf 54 540 Td (15. Full Request Flow) Tj ET
+BT /F1 11 Tf 54 510 Td (Create post flow:) Tj ET
+BT /F3 10 Tf 66 484 Td (Browser) Tj ET
+BT /F3 10 Tf 66 469 Td (  -> PostController) Tj ET
+BT /F3 10 Tf 66 454 Td (  -> PostService) Tj ET
+BT /F3 10 Tf 66 439 Td (  -> S3StorageService) Tj ET
+BT /F3 10 Tf 66 424 Td (  -> AWS S3) Tj ET
+BT /F3 10 Tf 66 409 Td (  -> PostRepository) Tj ET
+BT /F3 10 Tf 66 394 Td (  -> MySQL database) Tj ET
+BT /F3 10 Tf 66 379 Td (  -> back to Browser) Tj ET
+BT /F1 11 Tf 54 351 Td (Load home page flow:) Tj ET
+BT /F3 10 Tf 66 325 Td (Browser) Tj ET
+BT /F3 10 Tf 66 310 Td (  -> PostController) Tj ET
+BT /F3 10 Tf 66 295 Td (  -> PostService) Tj ET
+BT /F3 10 Tf 66 280 Td (  -> PostRepository) Tj ET
+BT /F3 10 Tf 66 265 Td (  -> MySQL database) Tj ET
+BT /F3 10 Tf 66 250 Td (  -> posts.html) Tj ET
+BT /F3 10 Tf 66 235 Td (  -> Browser) Tj ET
+BT /F1 11 Tf 54 207 Td (Load image flow:) Tj ET
+BT /F3 10 Tf 66 181 Td (Browser) Tj ET
+BT /F3 10 Tf 66 166 Td (  -> PostController) Tj ET
+BT /F3 10 Tf 66 151 Td (  -> PostService) Tj ET
+BT /F3 10 Tf 66 136 Td (  -> PostRepository) Tj ET
+BT /F3 10 Tf 66 121 Td (  -> MySQL database) Tj ET
+BT /F3 10 Tf 66 106 Td (  -> S3StorageService) Tj ET
+BT /F3 10 Tf 66 91 Td (  -> AWS S3) Tj ET
+BT /F3 10 Tf 66 76 Td (  -> Browser) Tj ET
+BT /F1 9 Tf 54 30 Td (Java Reghub Student Guide - Page 9 of 10) Tj ET
+endstream
+endobj
+23 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 22 0 R >>
+endobj
+24 0 obj
+<< /Length 2312 >>
+stream
+BT /F1 11 Tf 54 735 Td (Delete post flow:) Tj ET
+BT /F3 10 Tf 66 709 Td (Browser) Tj ET
+BT /F3 10 Tf 66 694 Td (  -> PostController) Tj ET
+BT /F3 10 Tf 66 679 Td (  -> PostService) Tj ET
+BT /F3 10 Tf 66 664 Td (  -> PostRepository) Tj ET
+BT /F3 10 Tf 66 649 Td (  -> MySQL database) Tj ET
+BT /F3 10 Tf 66 634 Td (  -> S3StorageService) Tj ET
+BT /F3 10 Tf 66 619 Td (  -> AWS S3) Tj ET
+BT /F3 10 Tf 66 604 Td (  -> Browser) Tj ET
+BT /F2 15 Tf 54 576 Td (16. Easy Way To Remember) Tj ET
+BT /F1 11 Tf 54 546 Td (Use this simple sentence:) Tj ET
+BT /F1 11 Tf 54 524 Td (The controller receives the request, the service decides what to do, the repository) Tj ET
+BT /F1 11 Tf 54 509 Td (saves database data, and the storage service handles image files.) Tj ET
+BT /F2 15 Tf 54 487 Td (17. Good Student Questions) Tj ET
+BT /F1 11 Tf 54 457 Td (Ask students:) Tj ET
+BT /F1 11 Tf 64 435 Td (- Why should the controller not contain all the logic?) Tj ET
+BT /F1 11 Tf 64 420 Td (- Why do we use a service layer?) Tj ET
+BT /F1 11 Tf 64 405 Td (- What does the repository do for us?) Tj ET
+BT /F1 11 Tf 64 390 Td (- Why store the image in S3 but post details in MySQL?) Tj ET
+BT /F1 11 Tf 64 375 Td (- What would happen if the image upload fails?) Tj ET
+BT /F1 11 Tf 64 360 Td (- What would happen if the database save fails?) Tj ET
+BT /F1 11 Tf 64 345 Td (- Where do logs appear when the app runs?) Tj ET
+BT /F2 15 Tf 54 323 Td (18. Summary) Tj ET
+BT /F1 11 Tf 54 293 Td (Java Reghub is a simple post application.) Tj ET
+BT /F1 11 Tf 54 271 Td (It teaches how a Spring Boot app is organized into layers.) Tj ET
+BT /F1 11 Tf 54 249 Td (Each layer has one main responsibility:) Tj ET
+BT /F1 11 Tf 64 227 Td (- View: shows the page) Tj ET
+BT /F1 11 Tf 64 212 Td (- Controller: receives browser requests) Tj ET
+BT /F1 11 Tf 64 197 Td (- Service: contains business rules) Tj ET
+BT /F1 11 Tf 64 182 Td (- Repository: talks to the database) Tj ET
+BT /F1 11 Tf 64 167 Td (- Model: represents database data) Tj ET
+BT /F1 11 Tf 64 152 Td (- Storage: handles uploaded images) Tj ET
+BT /F1 11 Tf 64 137 Td (- Config: creates shared setup objects) Tj ET
+BT /F1 11 Tf 54 115 Td (This structure helps students understand how real Java web applications are built.) Tj ET
+BT /F1 9 Tf 54 30 Td (Java Reghub Student Guide - Page 10 of 10) Tj ET
+endstream
+endobj
+25 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> >> /Contents 24 0 R >>
+endobj
+xref
+0 26
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000184 00000 n 
+0000000254 00000 n 
+0000000329 00000 n 
+0000000397 00000 n 
+0000002873 00000 n 
+0000003019 00000 n 
+0000005216 00000 n 
+0000005362 00000 n 
+0000007284 00000 n 
+0000007432 00000 n 
+0000009427 00000 n 
+0000009575 00000 n 
+0000011687 00000 n 
+0000011835 00000 n 
+0000014022 00000 n 
+0000014170 00000 n 
+0000016177 00000 n 
+0000016325 00000 n 
+0000018435 00000 n 
+0000018583 00000 n 
+0000020663 00000 n 
+0000020811 00000 n 
+0000023176 00000 n 
+trailer
+<< /Size 26 /Root 1 0 R >>
+startxref
+23324
+%%EOF
