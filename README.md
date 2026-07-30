@@ -2,7 +2,7 @@
 
 A small Spring Boot tutorial app for Jenkins CI/CD practice. It lets a user create a post with a title and image upload.
 
-## What Is Included
+## What Is Included 
 
 - Spring Boot web UI with Thymeleaf
 - Controller, service, repository, and entity layers
