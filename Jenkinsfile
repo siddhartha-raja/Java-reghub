@@ -2,40 +2,44 @@ pipeline {
     agent any
 
     tools {
-        jdk 'jdk17'
-        maven 'maven3'
+        sonarQubeScanner 'SonarScanner'
+    }
+
+    environment {
+        MAVEN_HOME = '/opt/maven'
+        PATH = "${env.PATH}:${MAVEN_HOME}/bin"
     }
 
     stages {
+
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        stage('Unit Tests') {
+        stage('Verify') {
             steps {
-                sh 'mvn clean test'
+                sh '''
+                    java -version
+                    mvn -version
+                    sonar-scanner --version
+                '''
             }
         }
 
-        stage('Integration Tests') {
+        stage('Build') {
             steps {
-                sh 'mvn verify'
+                sh 'mvn clean verify'
             }
         }
 
-        stage('Package') {
+        stage('Sonar Analysis') {
             steps {
-                sh 'mvn -DskipTests package'
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                withSonarQubeEnv('SonarCloud') {
+                    sh 'sonar-scanner'
+                }
             }
-        }
-    }
-
-    post {
-        always {
-            junit 'target/surefire-reports/*.xml,target/failsafe-reports/*.xml'
         }
     }
 }
