@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        sonarQubeScanner 'SonarScanner'
-    }
-
     environment {
         MAVEN_HOME = '/opt/maven'
         PATH = "${env.PATH}:${MAVEN_HOME}/bin"
@@ -18,26 +14,15 @@ pipeline {
             }
         }
 
-        stage('Verify') {
-            steps {
-                sh '''
-                    java -version
-                    mvn -version
-                    sonar-scanner --version
-                '''
-            }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'mvn clean verify'
-            }
-        }
-
-        stage('Sonar Analysis') {
+        stage('Build & SonarQube Cloud Analysis') {
             steps {
                 withSonarQubeEnv('SonarCloud') {
-                    sh 'sonar-scanner'
+                    sh '''
+                        mvn clean verify sonar:sonar \
+                          -Dsonar.projectKey=siddhartha-raja_Java-reghub \
+                          -Dsonar.organization=siddhartha-raja \
+                          -Dsonar.host.url=https://sonarcloud.io
+                    '''
                 }
             }
         }
