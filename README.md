@@ -4,7 +4,7 @@ A small Spring Boot tutorial app for Jenkins CI/CD practice. It lets a user crea
 
 ## What Is Included 
 
-- Spring Boot web UI with Thymeleaf
+- Spring Boot web UI with Thymeleaf 
 - Controller, service, repository, and entity layers
 - MySQL database support
 - AWS S3 image upload support
