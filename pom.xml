@@ -13,11 +13,12 @@
 
     <groupId>com.reghub</groupId>
     <artifactId>java-reghub</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${revision}</version>
     <name>Java Reghub</name>
     <description>Simple post application for Jenkins CI/CD tutorial</description>
 
     <properties>
+    <revision>0.0.1</revision>
         <java.version>17</java.version>
         <aws.sdk.version>2.29.6</aws.sdk.version>
         <testcontainers.version>1.21.4</testcontainers.version>
