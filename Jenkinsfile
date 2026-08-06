@@ -14,7 +14,7 @@ pipeline {
             }
         }
 
-        stage('Build & SonarQube Cloud Analysis') {
+        stage('Build & SonarCloud Analysis') {
             steps {
                 withSonarQubeEnv('SonarCloud') {
                     sh '''
@@ -25,6 +25,26 @@ pipeline {
                     '''
                 }
             }
+        }
+
+        stage('Deploy to Nexus') {
+            steps {
+                sh 'mvn deploy -DskipTests'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build, SonarCloud analysis, and Nexus deployment completed successfully.'
+        }
+
+        failure {
+            echo 'Pipeline failed. Deployment to Nexus was skipped.'
+        }
+
+        always {
+            cleanWs()
         }
     }
 }
